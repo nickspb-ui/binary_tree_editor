@@ -16,3 +16,4 @@ typedef struct Tree {
 void print_tree(Tree*, int*, int);
 void add(Tree**, int);
 bool del(Tree*, int, Tree*);
+void print_nodes(Tree*);

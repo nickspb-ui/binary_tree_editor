@@ -15,7 +15,7 @@ void add(Tree** t, int k) { // При равном числе узлов в левом и правом поддеревь
 		(*t)->key = k;
 		(*t)->left = nullptr;
 		(*t)->right = nullptr;
-		(*t)->N = 0;
+		(*t)->N = 1;
 	}
 	else {
 		if ((*t)->left == nullptr) {
@@ -42,7 +42,7 @@ result find_replacement(Tree* t, int search_key) { // Поиск самого глубокого узл
 	res.cond = false;
 	if (t->right != nullptr) {
 		if (t->left->N <= t->right->N) {
-			if (t->right->N == 0) {
+			if (t->right->N == 1) {
 				res.k = t->key;
 				res.cond = true;
 				delete t->right;
@@ -55,7 +55,7 @@ result find_replacement(Tree* t, int search_key) { // Поиск самого глубокого узл
 			}
 		}
 		else {
-			if (t->left->N == 0) {
+			if (t->left->N == 1) {
 				res.k = t->left->key;
 				res.cond = true;
 				delete t->left;
@@ -69,7 +69,7 @@ result find_replacement(Tree* t, int search_key) { // Поиск самого глубокого узл
 		}
 	}
 	else {
-		if (t->left->N == 0) {
+		if (t->left->N == 1) {
 			res.k = t->left->key;
 			res.cond = true;
 			delete t->left;
@@ -120,5 +120,13 @@ void print_tree(Tree* t, int* x, int y) {
 		printf("%d", t->key);
 		(*x)++;
 		print_tree(t->right, x, y + 1);
+	}
+}
+
+void print_nodes(Tree* t) {
+	if (t != nullptr) {
+		std::cout << "Узел " << t->key << ", количество узлов в поддереве: " << t->N << std::endl;
+		print_nodes(t->left);
+		print_nodes(t->right);
 	}
 }
